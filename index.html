@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script
+  src="http://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  <title>LightField</title>
+  <script>
+  
+  aperture = 0;
+  focus = -50
+
+  $(function() {
+    for(var i = 0; i < 100; i += 10) {
+      for(var j = -50; j <= 50; j += 5) {
+        // $("body").append('<img id="hidden src="dst/output_ap' + i + '_fl' + j + '.png">');
+        $("body").append('<img id="hidden" src="dst/JPEG Images/output_ap' + aperture + '_fl' + j + '.png">');
+      }
+    }
+
+    $("#aperture").on("input", function () {
+      aperture = $(this).val();
+      var filename = "dst/output_ap" + aperture + "_fl" + focus + ".png"
+        console.log(filename)
+        $("img#show").attr("src", filename)
+    });
+
+    $("#focus").on("input", function () {
+      focus = $(this).val();
+      var filename = "dst/output_ap" + aperture + "_fl" + focus + ".png"
+        console.log(filename)
+        $("img#show").attr("src", filename)
+    });
+  });
+
+  </script>
+  <style>
+  html {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: #000;
+  }
+
+  img {
+    width: 600px;
+    height: 600px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  img#hidden {
+    display: none;
+  }
+
+  input {
+    display: block;
+    margin: 20px auto;
+  }
+  </style>
+</head>
+<body>
+  <img id="show" src="dst/JPEG Images/output_ap0_fl-50.png">
+  <input type="range" id="aperture" name="aperture" step="10" min="0" max="90" value="0">
+  <input type="range" id="focus" name="focus" step="5" min="-50" max="50" value="-50">
+</body>
+</html>
